@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* let person = function(lastname, id){
+            this.lastname=lastname
+            this.id=id
+        }
+        person.prototype.determineBehaviour=function(){
+            console.log('both of them are hot heads')
+        }
+
+        var deepak = new person('yadav',2254)
+        let ishu = new person('gupta',2728)
+        
+        var arr=[] */
+
+
+
+        // Example of first class function in actions as first class functions can be passed as parameters or can
+        // get returned back from a function. in this example function is passed as a parameter to another function
+        /* var array = [1990, 1965, 1937, 1993, 2004]
+
+        function arrayCalc(el, func) {
+            var res = []
+            for (let index = 0; index < array.length; index++) {
+                  res.push(func(el[index]))
+            }
+            return res
+        }
+        function calDob(age){
+            return (2016-age)
+        }
+
+        var ages =arrayCalc(array,calDob)
+        console.log(ages) */
+
+
+        // Example of first class function in actions as first class functions can be passed as parameters or can
+        // get returned back from a function. in this example function is returned from another function
+        /*  function dogtype(dog){
+             if(dog==='mastiff'){
+                 return function(name){
+                     console.log('hey'+name+' What does your mastiff look like?')
+                 }
+             }
+             else if(dog==='dogo')
+             {
+                 return function(name){
+                     console.log('does'+name+' bite?')
+                 }
+             }
+         }
+ 
+          dogtype('dogo')('dogo') */
+
+        // In this example we will see IIFE immidiate invocation of function expression , this technique is also 
+        // useful in data privacy as the variable defined with IIFE cannot be accessed outside that.
+
+        /*  (function(){
+             var score = Math.random()*10
+             console.log(score>=5)
+         })();
+
+         (function (goodluck){
+            var num =Math.random()*10;
+            console.log(num>=(5-goodluck))
+         })(5) */
+
+        // closures example 1
+
+        /*  function retirement(retirementAge){
+            const a= 'years left in retirement.'
+            return function(dateOfBirth){
+              console.log(retirementAge- (2020-dateOfBirth)+' '+a)
+            }
+        }
+
+        retirementUs =retirement(66) // this is the power of closure we can create retirement functions for different countries.
+        retirementUs(1993)
+        retirementIndia=retirement(75)(1992) */
+
+        // closure example 2
+
+        /* function interviewQuestion(job) {
+
+            const random = 'Hey!'
+            const random1 = 'Can you'
+            return function (name){
+                console.log(random+' '+name+' '+random1+' '+job)
+            }
+          }
+
+        interviewQuestion_teacher=interviewQuestion('teach multiple computer subjects together ?')
+        interviewQuestion_teacher('Mike')
+
+        interviewQuestion_baker=interviewQuestion('handle cash hand-in-hand with baking ?')('Rosie') */
+
+
+        // here we will see the call method in action and using call we can borrow methods form other objects and apply on our objects.
+
+        /* var em ={
+            realName:'Marshall Mathers',
+            name:'Eminem',
+            job:'hiphop rapper',
+            intro : function(style,timeOfDay){
+                 if(style==='formal'){
+                     console.log('Hello everyone!.My name is '+this.realName+'And I am a '+this.job+'.Today I am doing that in the '+timeOfDay)
+                 }
+                 else if(style==='friendly'){ 
+                     console.log('Hey Yo! My name zz '+ this.name+ 'I just fucking kill MCs for real.Today I am doing that in the '+timeOfDay)
+                 }
+            }
+        }
+
+        em.intro('formal','Evening')
+        em.intro('friendly','Evening')
+        
+        var tal ={ 
+            realName :'Mikhail Tal',
+            job :'Taking the chess players to a deep dark forest where 2+2=5 and the path leading out is only wide enough for 1.'
+        }
+        em.intro.call(tal,'formal','afternoon') // so here we are using the call method and it takes 2 parameters and the first parameter points the this variable of em to tal and it works for tal so this is called method burrowing .Apply() is also similar to call but as a second parameter it takes an array of values. */
+
+        //Now we will see the bind function in action. Bind can store a method which is of another object it is also useful in function currying(refer google for function currying)
+
+        /* var em ={
+            realName:'Marshall Mathers',
+            name:'Eminem',
+            job:'hiphop rapper',
+            intro : function(style,timeOfDay){
+                 if(style==='formal'){
+                     console.log('Hello everyone!.My name is '+this.realName+'And I am a '+this.job+'.Today I am doing that in the '+timeOfDay)
+                 }
+                 else if(style==='friendly'){ 
+                     console.log('Hey Yo! My name zz '+ this.name+ 'I just fucking kill MCs for real.Today I am doing that in the '+timeOfDay)
+                 }
+            }
+        }
+        var tal ={ 
+            realName :'Mikhail Tal',
+            job :'Taking the chess players to a deep dark forest where 2+2=5 and the path leading out is only wide enough for 1.'
+        }
+
+        emFriendly=em.intro.bind(em,'friendly')// so here with the help of bind function we are able to pre-save a emfriendly function with a friendly parameter which is one of the arguments required by the function.
+        emFriendly('evening')// now we call the function using a single parameter.
+
+        talFormal = em.intro.bind(tal,'formal') // so here we have converted the em's this variable to tal and now it points towards tal.
+        talFormal('morning') */
+
+        //Here we will do a real use of bind()
+        /*  var years = [1990, 1960, 1983, 1997, 2001, 1945, 2010]
+ 
+         function calcAge(ages, fn) {
+             var resArr = []
+             for (let index = 0; index < ages.length; index++) {
+                 resArr.push(fn(ages[index]))
+             }
+             return resArr
+         }
+         function calculateAge(year) {
+             return 2020 - year
+         }
+         function isFullAge(japanLimit, year) {
+             return year > japanLimit
+         }
+         var ages = calcAge(years, calculateAge)
+         console.log(ages)
+         var isFullAgeJapan = calcAge(ages, isFullAge.bind(this, 50))
+         console.log(isFullAgeJapan)
+         var isFullAgeIndia = calcAge(ages, isFullAge.bind(this, 35))
+         console.log(isFullAgeIndia) */
+
+        //here we will see how the this keyword works 
+        // whenever there is a regular function call and not a method call than this keyword always points the global object which is the window object.
+        // Also the global object is not given value immmidialtly it is given when a method is called using the object 
+
+      /*   console.log(this) // this will always point to the global object
+        var em = {
+            realName: 'Marshall Mathers',
+            name: 'Eminem',
+            job: 'hiphop rapper',
+            intro: function () {
+                console.log(this) // this is a method call using the em object so it will not print the global object but it will print em object
+            }
+        }
+        em.intro() // this is not a regular function call, this is a method call.
+
+        var em = {
+            realName: 'Marshall Mathers',
+            name: 'Eminem',
+            job: 'hiphop rapper',
+            intro: function () {
+                return function innerFunction() {
+                    console.log(this) // here this will print the global object this is called using the regular function call not using any object and this is the rule.
+                }
+                innerFunction()
+            }
+        }
+        em.intro() */
+    </script>
+</body>
+
+</html>
